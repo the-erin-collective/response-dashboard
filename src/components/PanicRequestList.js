@@ -28,11 +28,11 @@ const PanicRequestList = () => {
       });
   };
 
-  const refreshList = () => {
+ /* const refreshList = () => {
     retrievePanicRequests();
     setCurrentPanicRequest(null);
     setCurrentIndex(-1);
-  };
+  };*/
 
   const setActivePanicRequest = (panicRequest, index) => {
     setCurrentPanicRequest(panicRequest);
