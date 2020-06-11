@@ -1,9 +1,9 @@
 import http from "../http-common";
                                                                                              
-const apiRoute = `/api/panic_request`;
+const apiRoute = `/panic_request`;
 
 const findAll = () => {
-  return http.get(apiRoute);
+  return http.get(apiRoute, );
 };
 
 const findOne = (id) => {
