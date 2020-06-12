@@ -1,7 +1,7 @@
 # response-dashboard
  web app for viewing response information
 
-# Dependencies
+## Dependencies
  
 Make sure nodeJS and NPM are installed on your computer.
 
