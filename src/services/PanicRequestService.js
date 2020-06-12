@@ -1,13 +1,13 @@
 import http from "../http-common";
                                                                                              
-const apiRoute = `/panic_request`;
+const apiRoute = `/`;
 
 const findAll = () => {
-  return http.get(apiRoute, );
+  return http.get(apiRoute,);
 };
 
 const findOne = (id) => {
-    return http.get(apiRoute+ `${id}`);
+    return http.get(apiRoute+ `/request/${id}`);
   };
 
 const findAllUnresponded = () => {
@@ -19,15 +19,19 @@ const create = (data) => {
 };
 
 const update = (id, data) => {
-  return http.put(apiRoute + `${id}`, data);
+  return http.put(apiRoute + `/request/${id}`, data);
 };
 
 const remove = (id) => {
-  return http.delete(apiRoute + `${id}`);
+  return http.delete(apiRoute + `/request/${id}`);
 };
 
-const findAllByName = (name) => {
-  return http.get(apiRoute + `/requester?name=${name}`);
+const searchbyname = (name) => {
+  return http.get(apiRoute + `/searchbyname`);
+//  if(name !== null && name !== "")
+   // return http.get(`http://localhost:8080/api/searchbyname?name=${name}`);
+ //   return http.get(apiRoute + `/searchbyname?name=${name}`);
+ // return Promise.resolve([]);
 };
 
 export default {
@@ -37,5 +41,5 @@ export default {
   create,
   update,
   remove,
-  findAllByName
+  searchbyname
 };

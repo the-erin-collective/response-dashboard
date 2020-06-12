@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import PanicRequest from "./components/PanicRequest";
+// import PanicRequest from "./components/PanicRequest";
 import PanicRequestList from "./components/PanicRequestList";
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/panic_requests"]} component={PanicRequestList} />
-            <Route path="/panic_requests/:id" component={PanicRequest} />
+            {/* <Route path="/request/:id" component={PanicRequest} /> */}
           </Switch>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PanicRequestDataService from "../services/PanicRequestService";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+const moment= require('moment') 
 
 const PanicRequestList = () => {
   const [panicRequests, setPanicRequests] = useState([]);
@@ -20,6 +21,10 @@ const PanicRequestList = () => {
   const retrievePanicRequests = () => {
     PanicRequestDataService.findAll()
       .then(response => {
+        for(let i = 0; i < response.data.length; i++)
+        { 
+           response.data[i].friendlyDate = moment(response.data[i].createdAt).format('MMMM Do YYYY, h:mm:ss a');
+        }
         setPanicRequests(response.data);
         console.log(response.data);
       })
@@ -40,8 +45,13 @@ const PanicRequestList = () => {
   };
 
   const findByName = (searchName) => {
-    PanicRequestDataService.findByName(searchName)
+    PanicRequestDataService.searchbyname(searchName)
       .then(response => {
+        if(response === null || response === undefined || response.data === null || response.data === undefined )
+        {
+            setPanicRequests([]);
+            return Promise.resolve([]);
+        }
         setPanicRequests(response.data);
         console.log(response.data);
       })
@@ -52,20 +62,20 @@ const PanicRequestList = () => {
 
   return (
     <div className="list row">
-      <div className="col-md-8">
+      <div id="searchbox" className="col-md-8">
         <div className="input-group mb-3">
           <input
             type="text"
             className="form-control"
             placeholder="Search by name"
             value={searchName}
-            onChange={onChangeSearchName}
+            onChange={ searchName.length === 0 ? function(){} : onChangeSearchName()}
           />
           <div className="input-group-append">
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onClick={findByName}
+              onClick={ searchName.length === 0 ? function(){} : findByName(searchName)}
             >
               Search
             </button>
@@ -85,7 +95,10 @@ const PanicRequestList = () => {
                 onClick={() => setActivePanicRequest(panicRequest, index)}
                 key={index}
               >
-                {panicRequest.geolat}, {panicRequest.geolong}
+                <span class="name">Requester: {JSON.parse(panicRequest.requester).short_name}</span>
+                <span class="geocoords">{panicRequest.geolat.toString().substring(0, panicRequest.geolat.toString().indexOf(".") + 4)}, {panicRequest.geolong.toString().substring(0, panicRequest.geolong.toString().indexOf(".") + 4)}</span>
+                <span class="date">{panicRequest.friendlyDate}</span>
+                {/* <span>{moment(panicRequest.createdAt).format('YYYY-MM-DD HH:mm:ss') }</span> */}
               </li>
             ))}
         </ul>
@@ -96,23 +109,23 @@ const PanicRequestList = () => {
             <h4>Panic Request</h4>
             <div>
               <label>
-                <strong>Geolat:</strong>
+                <strong>Name:</strong>
               </label>{" "}
-              {currentRequest.geolat}
+              { JSON.parse(currentRequest.requester).full_name }
             </div>
             <div>
               <label>
-                <strong>Geolong:</strong>
+                <strong>GeoCoords:</strong>
               </label>{" "}
-              {currentRequest.geolong}
+              {currentRequest.geolat}, {currentRequest.geolong}
             </div>
          
-            <Link
+            {/* <Link
               to={"/panic_request/" + currentRequest.id}
               className="badge badge-warning"
             >
               Edit
-            </Link>
+            </Link> */}
           </div>
         ) : (
           <div>

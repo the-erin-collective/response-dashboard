@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+#searchbox{
+  display: none;
+}
+
+.list-group{
+  cursor: pointer;
+}
+
+.list-group li:hover:not(.active){
+  background: #ddf;
+}
+
+.list-group li .name{
+  text-align: left;
+}
+
+.list-group li .geocoords{
+  text-align: center;
+  width: 60%;
+  left: 50%;
+  position: absolute;
+  margin-left: -35%;
+}
+
+.list-group li .date{
+  text-align: right;
+  position: absolute;
+  right: 10px;
+}
