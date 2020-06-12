@@ -119,7 +119,12 @@ const PanicRequestList = () => {
               </label>{" "}
               {currentRequest.geolat}, {currentRequest.geolong}
             </div>
-         
+            <div>
+              <label>
+                <strong>Date Created:</strong>
+              </label>{" "}
+              {currentRequest.friendlyDate}
+            </div>
             {/* <Link
               to={"/panic_request/" + currentRequest.id}
               className="badge badge-warning"
